@@ -20,6 +20,14 @@ dependencies {
 	implementation("org.apache.kafka:kafka-streams")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.5.1")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.5.1")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:1.5.1")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-debug:1.5.1")
+	implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
