@@ -20,6 +20,8 @@ private fun createProducer(): Producer<String, String> {
 fun main(args: Array<String>) {
     log.info("Kafka Producer")
 
+    // kafka-topics.sh --bootstrap-server localhost:9092 --create --topic kotlin_topic --partitions 3 --replication-factor 1
+
     // Setting up the properties
     val producer = createProducer()
 

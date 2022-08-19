@@ -18,7 +18,7 @@ private fun createProducer(): Producer<String, String> {
 }
 
 fun main(args: Array<String>) {
-    log.info("Kafka Producer with Callback")
+    log.info("Kafka Producer using Keys")
 
     // kafka-topics.sh --bootstrap-server localhost:9092 --create --topic kotlin_topic --partitions 3 --replication-factor 1
 
@@ -28,10 +28,18 @@ fun main(args: Array<String>) {
     //producer.dispatch(producerRecord)         // If you want to run using coroutine, discoment this line and add 'suspend' at the main function
 
     for(i in 0 .. 10){
-        val producerRecord: ProducerRecord<String, String> = ProducerRecord<String, String>("kotlin_topic", "${i}. Message sent by Kafka producer")     // Create a producer record - What we are going to send in Kafka
+        val topic: String = "kotlin_topic"
+        val value: String = "Hello world + ${i}"
+        val key:String = "id_${i}"
+
+        val producerRecord: ProducerRecord<String, String> = ProducerRecord<String, String>("kotlin_topic", key, value)     // Create a producer record - What we are going to send in Kafka
         producer.send(producerRecord) { record: RecordMetadata, exception: Exception? ->
             if(exception == null || exception.stackTrace.isEmpty()){
-                log.info("Received a new message. Topic '${record.topic()}, partition: '${record.partition()}' offset '${record.offset()}' ")
+                log.info("Received a new message. " +
+                        "Topic '${record.topic()}, " +
+                        "Key '${producerRecord.key()} " +
+                        "partition: '${record.partition()}' " +
+                        "offset '${record.offset()}'")
             }else
                 log.error("no message received: '${exception}'")
         }
